@@ -1,0 +1,333 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Cash Machine",
+    "version": "1.0.0",
+    "title": "CashMachine"
+  },
+  "host": "localhost:3000",
+  "basePath": "/api",
+  "tags": [
+    {
+      "name": "user",
+      "description": "Operaciones sobre el usuario"
+    },
+    {
+      "name": "acount",
+      "description": "Operaciones sobre las cuentas bancarias"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/user": {
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Lista los usuario",
+        "operationId": "listUser",
+        "responses": {
+          "default": {
+            "description": "Lista de usuarios"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Crea un usuario",
+        "description": "Crea un usuario en nuestra app",
+        "operationId": "createUser",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Usuario creado",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/acount": {
+      "get": {
+        "tags": [
+          "acount"
+        ],
+        "summary": "Cuenta bancaria de usuario",
+        "operationId": "getAcount",
+        "responses": {
+          "default": {
+            "description": "Cuenta bancaria de usuario"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "acount"
+        ],
+        "summary": "Crea una cuenta bancaria para un usuario",
+        "description": "Crea una cuenta bancaria para un usuario",
+        "operationId": "createAcount",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Cuenta creada",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Acount"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/acount/cashcredit": {
+      "put": {
+        "tags": [
+          "acount"
+        ],
+        "summary": "Retirar dinero de una cuenta de crédito de un usuario",
+        "description": "Retirar dinero de una cuenta de crédito de un usuario",
+        "operationId": "cashcredit",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Retiro de dinero aceptado",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Transaction"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/acount/paycredit": {
+      "put": {
+        "tags": [
+          "acount"
+        ],
+        "summary": "Pagar dinero de una cuenta de crédito de un usuario",
+        "description": "Pagar dinero de una cuenta de crédito de un usuario",
+        "operationId": "paycredit",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Pago de dinero exitoso",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Transaction"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/acount/cashdebit": {
+      "put": {
+        "tags": [
+          "acount"
+        ],
+        "summary": "Retirar dinero de una cuenta de debito de un usuario",
+        "description": "Retirar dinero de una cuenta de debito de un usuario",
+        "operationId": "cashdebit",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Retiro de dinero aceptado",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Transaction"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/acount/depositdebit": {
+      "put": {
+        "tags": [
+          "acount"
+        ],
+        "summary": "Depositar dinero de una cuenta de debito de un usuario",
+        "description": "Depositar dinero de una cuenta de debito de un usuario",
+        "operationId": "depositdebit",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Deposito de dinero exitoso",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Transaction"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/acount/user": {
+      "get": {
+        "tags": [
+          "acount"
+        ],
+        "summary": "Obtener todas las cuentas del usuario",
+        "operationId": "getAccountUser",
+        "responses": {
+          "default": {
+            "description": "Obtener todas las cuentas del usuario"
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "petstore_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "http://petstore.swagger.io/oauth/dialog",
+      "flow": "implicit",
+      "scopes": {
+        "write:pets": "modify pets in your account",
+        "read:pets": "read your pets"
+      }
+    },
+    "api_key": {
+      "type": "apiKey",
+      "name": "api_key",
+      "in": "header"
+    }
+  },
+  "definitions": {
+    "User": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "username": {
+          "type": "string"
+        },
+        "lastname": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    },
+    "Acount": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "user": {
+          "type": "string"
+        },
+        "type_acount": {
+          "type": "string"
+        },
+        "mount": {
+          "type": "number"
+        }
+      }
+    },
+    "Transaction": {
+      "type": "object",
+      "properties": {
+        "id_acount": {
+          "type": "string"
+        },
+        "mount": {
+          "type": "number"
+        }
+      }
+    },
+    "TypeAcount": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    },
+    "ApiResponse": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "type": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "externalDocs": {
+    "description": "Find out more about Swagger",
+    "url": "http://swagger.io"
+  }
+}
